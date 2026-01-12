@@ -50,6 +50,6 @@ Staff resource allocation.
 ### Knowledge_Graph_Evaluation_Criteria.pdf: Technical benchmarking and comparative analysis.
 
 ## 👤 Author & Credits
-Project Lead & Database Modeling: Yanhui Ma
+Database Modeling: Yanhui Ma
 UI/UX & System Design: Yanhui Ma
 Academic Context: Developed for the Information Analysis and Content Management course (ISIT906).
