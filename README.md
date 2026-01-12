@@ -1,67 +1,55 @@
 # 🏥 Elderly Malnutrition Management Knowledge Graph
 ## 🌟 Overview
-This project provides a Graph Database solution designed to combat malnutrition in the elderly. By leveraging Neo4j and Cypher, the system integrates fragmented healthcare data into a unified Knowledge Graph, enabling seamless collaboration between GPs, Nurses, and Dietitians.
+This project provides a Graph Database solution designed to combat malnutrition in the elderly. By leveraging Neo4j and Cypher, the system integrates fragmented healthcare data into a unified Knowledge Graph.
 
-This graph-based approach excels at tracking the complex relationships between a resident's nutritional needs, their evolving care plans, and the multi-disciplinary team responsible for their wellbeing.
+The core objective is to bridge the communication gap between GPs, Nurses, and Dietitians, ensuring that every resident receives a personalized and continuously monitored nutritional care plan.
 
-## 🚀 Core Components
-The repository contains a full-cycle development of the system:
+## 🏗️ Knowledge Graph Architecture
+The system is modeled around a multi-disciplinary care environment. The schema ensures data integrity and traceability across various medical roles:
 
-### setup_database.cypher: The complete database schema including nodes (Resident, Staff, CarePlan) and relationship logic.
+### Entities: Resident, General Practitioner (GP), Nurse, Dietitian, CarePlan, NutritionalRequirement.
 
-### Background_Research_Elderly_Malnutrition.pdf: In-depth domain analysis on the causes and risks of malnutrition.
+### Relationship Logic:
 
-### Dietary_and_Nutrition_Management_System_Demo_Slides.pdf: Original UI/UX prototypes and system workflow designed by the author.
+(Nurse)-[:REPORTS_TO]->(GP): Establishes the clinical hierarchy.
 
-### Evaluation_Criteria_and_Peer_Analysis.pdf: Technical benchmarking and comparative analysis of existing solutions.
+(Resident)-[:HAS_CARE_PLAN]->(CarePlan): Links patients to specific medical interventions.
 
-## 🏗️ Knowledge Graph Schema
-The system is modeled around the following core entities:
+(Dietitian)-[:ASSESSES]->(Resident): Captures the specialized nutritional evaluation process.
 
-### People: Resident, General Practitioner (GP), Nurse, Dietitian.
+## 💻 Cypher Implementation Highlights
+The project utilizes advanced Cypher queries to manage and validate complex healthcare scenarios. Below is a key logic example:
 
-### Clinical: CarePlan, NutritionalRequirement, HealthRecord.
+Query: Resource & Care Plan Validation
+This query identifies "At Risk" residents and verifies if they have both an assigned Dietitian and an active Care Plan, ensuring no resident is left without professional oversight.
 
-### Key Relationships:
-
-(Nurse)-[:REPORTS_TO]->(GP)
-
-(Resident)-[:HAS_CARE_PLAN]->(CarePlan)
-
-(Dietitian)-[:ASSESSES]->(Resident)
-
-## 💻 Key Cypher Query Examples
-One of the strengths of this project is the ability to perform complex validation and cross-referencing. For example:
-
-Query: Validate Care Plan Assignment & Resource Mapping
-This query ensures that every "At Risk" resident is correctly mapped to a Dietitian and a corresponding Care Plan.
-
-### Cypher
+Cypher
 
 MATCH (r:Resident {status: 'At Risk'})-[:HAS_CARE_PLAN]->(p:CarePlan)
 OPTIONAL MATCH (p)<-[:RESPONSIBLE_FOR]-(d:Dietitian)
 RETURN r.name AS Resident, p.type AS PlanType, d.name AS AssignedDietitian
 
-## 🎨 UI/UX Design (Original Prototypes)
-Note: All system interfaces and user flow diagrams in the Demo Slides were independently designed and created by the author.
+## 🎨 UI/UX Design & Prototyping
+Independent Design: All system interfaces and user flow diagrams in the Demo Slides were originally designed and created by the author.
 
-The prototypes demonstrate how the back-end graph data is visualized for medical staff, including:
+The prototypes demonstrate how back-end graph data is translated into intuitive dashboards for medical staff, focusing on:
 
-Real-time nutrition risk dashboards.
+Real-time nutrition risk visualization.
 
-Collaborative care-plan tracking interfaces.
+Collaborative care-plan tracking.
 
-Staff resource allocation maps.
+Staff resource allocation.
 
-## 📊 Evaluation & Research
-The development followed a rigorous academic and technical framework:
+## 📁 Repository Structure
+### setup_database.cypher: Core Cypher script containing the schema and data relationship logic.
 
-Peer Analysis: Evaluated existing healthcare data structures to identify the "information silo" problem.
+### Background_Research_Elderly_Malnutrition.pdf: Domain research on the risks and impacts of malnutrition.
 
-Schema Verification: Tested the Knowledge Graph against 10+ core competency questions to ensure data integrity and query efficiency.
+### Dietary_and_Nutrition_Management_System_Demo_Slides.pdf: Comprehensive system prototypes and design thinking.
 
+### Knowledge_Graph_Evaluation_Criteria.pdf: Technical benchmarking and comparative analysis.
 
 ## 👤 Author & Credits
-Database Modeling & Cypher: Yanhui Ma
-System Design & Prototyping: Yanhui Ma
-Academic Context: Developed for the Information Analysis and Content Management course.
+Project Lead & Database Modeling: Yanhui Ma
+UI/UX & System Design: Yanhui Ma
+Academic Context: Developed for the Information Analysis and Content Management course (ISIT906).
