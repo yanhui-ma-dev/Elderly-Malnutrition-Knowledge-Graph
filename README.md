@@ -31,6 +31,5 @@ OPTIONAL MATCH (p)<-[:RESPONSIBLE_FOR]-(d:Dietitian)
 RETURN r.name AS Resident, p.type AS PlanType, d.name AS AssignedDietitian
 
 ## 👤 Author & Credits
-- **Database Modeling & Cypher Development**: Yanhui Ma
-- **UI/UX & System Design**: Yanhui Ma
+- **Database Modeling & UX & System Design**: Yanhui Ma
 - **Academic Context**: Developed for the *Information Analysis and Content Management* (ISIT906) course.
